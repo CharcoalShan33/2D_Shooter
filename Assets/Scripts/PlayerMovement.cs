@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public int speed = 10;
+    public float speed = 10;
     public GameObject missle;
+
+    // the amount of seconds in firing the projectile
+    public float fireRate = .5f;
+    public bool canFire = true;
+   
+    
+    float timePassed;
+  
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +29,20 @@ public class PlayerMovement : MonoBehaviour
     {
 
         CalculateMovement();
-        FireLaser();
+
+        if(Input.GetKeyDown(KeyCode.Space) && Time.time > timePassed )
+        {
+          
+            timePassed = Time.time+ fireRate;
+            canFire = true;
+            FireLaser();
+            Debug.Log("fire!");
+           
+        }
+       
+
+        
+        
        
     }
 
@@ -48,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(missle, transform.position, Quaternion.identity);
+
+           
         }
     }
 }
