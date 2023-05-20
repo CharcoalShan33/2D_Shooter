@@ -5,20 +5,24 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10;
+
     public GameObject missle;
 
-    // the amount of seconds in firing the projectile
+    private float _offsetY = .5f;
+
+    
     public float fireRate = .5f;
     public bool canFire = true;
-   
-    
-    float timePassed;
-  
+    private float timePassed;
+
+    [SerializeField]
+    private int _lives = 3;
+
 
     // Start is called before the first frame update
     void Start()
     {
-      
+
         transform.position = new Vector2(0, 0);
     }
 
@@ -30,20 +34,17 @@ public class PlayerMovement : MonoBehaviour
 
         CalculateMovement();
 
-        if(Input.GetKeyDown(KeyCode.Space) && Time.time > timePassed )
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > timePassed)
         {
-          
-            timePassed = Time.time+ fireRate;
+
+            timePassed = Time.time + fireRate;
             canFire = true;
             FireLaser();
-            Debug.Log("fire!");
-           
-        }
-       
 
-        
-        
-       
+
+        }
+
+
     }
 
 
@@ -55,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 direction = new Vector2(hInput, vInput);
 
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(direction * 10 * Time.deltaTime);
 
         //Bounds
 
@@ -68,9 +69,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(missle, transform.position, Quaternion.identity);
+            Instantiate(missle, transform.position + new Vector3(0, _offsetY, 0), Quaternion.identity);
 
-           
+
+        }
+
+    }
+
+    public void TakeDamage()
+    {
+        _lives--;
+
+        Debug.Log("How many Lives Left? " + _lives);
+
+        if(_lives < 1)
+        {
+            Destroy(this.gameObject);
         }
     }
+
+    
+   
 }
