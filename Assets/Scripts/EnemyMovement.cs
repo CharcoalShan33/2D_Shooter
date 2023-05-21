@@ -6,11 +6,13 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField]
     private float _enSpeed = 5.0f;
-   
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
+       
         
     }
 
@@ -42,6 +44,11 @@ public class EnemyMovement : MonoBehaviour
         }
         else if (other.CompareTag("Laser"))
             {
+
+            P_LaserMovement _laser = other.transform.GetComponent<P_LaserMovement>();
+
+            
+
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }

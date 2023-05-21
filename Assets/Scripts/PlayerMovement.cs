@@ -18,13 +18,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
+    private SpawnManager _Spawner;
 
     // Start is called before the first frame update
     void Start()
     {
 
         transform.position = new Vector2(0, 0);
+
+        _Spawner = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+
+        if(_Spawner == null)
+        {
+            Debug.LogError("Find the Object. It is NULL");
+        }
+
     }
+
 
 
     // Update is called once per frame
@@ -82,8 +92,11 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("How many Lives Left? " + _lives);
 
+
         if(_lives < 1)
         {
+
+            _Spawner.OnPlayerDeath();
             Destroy(this.gameObject);
         }
     }
