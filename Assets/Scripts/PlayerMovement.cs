@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
-    private SpawnManager _Spawner;
+    private Spawn _Spawner;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position = new Vector2(0, 0);
 
-        _Spawner = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        _Spawner = GameObject.Find("Spawn_Manager").GetComponent<Spawn>();
 
         if(_Spawner == null)
         {
