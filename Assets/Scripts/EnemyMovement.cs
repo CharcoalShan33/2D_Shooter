@@ -39,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
             if(player != null)
                     {
                     player.TakeDamage();
-                     }
+                    }
            
         }
         else if (other.CompareTag("Laser"))
