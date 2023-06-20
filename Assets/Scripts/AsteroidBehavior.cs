@@ -1,0 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AsteroidBehavior : MonoBehaviour
+{
+    [SerializeField]
+    private float _rotateSpeed = 3f;
+
+    [SerializeField]
+    private GameObject explodeObject;
+
+    private Spawn spawnManager;
+
+    private AudioSource _audioSound;
+    // Start is called before the first frame update
+    void Start()
+    {
+        spawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn>();
+
+
+        if (_audioSound == null)
+        {
+            Debug.LogError("AudioSource is not found! Add an audio source component.");
+        }
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Rotate(Vector3.forward * _rotateSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        if(other.tag == "Laser")
+        {
+            
+            Instantiate(explodeObject,transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+            spawnManager.StartSpawning();
+            Destroy(this.gameObject, .35f);
+            _audioSound.Play();
+            
+        }
+    }
+}

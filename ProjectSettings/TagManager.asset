@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Laser
+  - Meteor
+  - Boost
+  - Enemy Laser
   layers:
   - Default
   - TransparentFX
@@ -13,14 +16,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Power-ups
+  - Enemies
+  - Player
+  - Player_Projectiles
+  - Enemy_Projectiles
+  - Other Objects
+  - Background
+  - Post-Processing
   - 
   - 
   - 
