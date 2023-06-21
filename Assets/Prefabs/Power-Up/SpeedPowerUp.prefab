@@ -149,6 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Speed: 3
   powerUpId: 1
+  _pClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
+  _audio: {fileID: 2064985189870093868, guid: 3604e333cb5a74da5b820ddaaf2db62c, type: 3}
 --- !u!50 &5576399853268927947
 Rigidbody2D:
   serializedVersion: 4

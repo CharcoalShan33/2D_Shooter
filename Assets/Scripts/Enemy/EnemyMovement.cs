@@ -12,12 +12,17 @@ public class EnemyMovement : MonoBehaviour
 
     private Animator enemyAnim;
 
-    private AudioSource _audio;
+
+    private AudioSource audioExplode = null;
+
+  
 
     // Start is called before the first frame update
     void Start()
     {
         enemyAnim = GetComponent<Animator>();
+
+        audioExplode = GetComponent<AudioSource>();
 
         _player = GameObject.Find("Player").GetComponent<Player>();
 
@@ -30,13 +35,12 @@ public class EnemyMovement : MonoBehaviour
             Debug.LogError("Find the GameObject");
         }
 
-        if (_audio == null)
+        if(audioExplode == null)
         {
-            Debug.LogError("AudioSource is not found! Add an audio source component.");
+            Debug.LogError("Find the Audio Source Component");
         }
         
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -58,33 +62,34 @@ public class EnemyMovement : MonoBehaviour
     {
          
         if (other.CompareTag("Player"))
-        {
-            enemyAnim.SetTrigger("OnEnemyDeath");
-            _enSpeed = 0f;
-            Destroy(this.gameObject, 2.4f);
-            Debug.Log("Destroyed....");
-
+        { 
             Player player = other.transform.GetComponent<Player>();
             if(player != null)
                     {
                     _player.TakeDamage();
                     }
-           
-        }
-        else if (other.CompareTag("Laser"))
-            {
             
-            Debug.Log("Destroyed by a Laser");
-
-            Destroy(other.gameObject);
-
-            if(_player != null)
-            {
-                _player.AddScore(10);
-            }
 
             enemyAnim.SetTrigger("OnEnemyDeath");
             _enSpeed = 0f;
+            audioExplode.Play();
+            Destroy(this.gameObject, 2.4f);
+            
+
+        }
+        else if (other.CompareTag("Laser"))
+            {
+
+            Destroy(other.gameObject);
+
+            if (_player != null)
+            {
+                _player.AddScore(10);
+            }
+            
+            enemyAnim.SetTrigger("OnEnemyDeath");
+            _enSpeed = 0f;
+            audioExplode.Play();
             Destroy(this.gameObject, 2.4f);
 
         }

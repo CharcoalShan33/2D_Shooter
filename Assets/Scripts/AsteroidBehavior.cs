@@ -12,18 +12,14 @@ public class AsteroidBehavior : MonoBehaviour
 
     private Spawn spawnManager;
 
-    private AudioSource _audioSound;
+  
+
     // Start is called before the first frame update
     void Start()
     {
         spawnManager = GameObject.Find("Spawn_Manager").GetComponent<Spawn>();
 
-
-        if (_audioSound == null)
-        {
-            Debug.LogError("AudioSource is not found! Add an audio source component.");
-        }
-        
+       
     }
 
     // Update is called once per frame
@@ -41,8 +37,10 @@ public class AsteroidBehavior : MonoBehaviour
             Instantiate(explodeObject,transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             spawnManager.StartSpawning();
+            
             Destroy(this.gameObject, .35f);
-            _audioSound.Play();
+            
+            
             
         }
     }

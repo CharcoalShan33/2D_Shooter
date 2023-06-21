@@ -138,3 +138,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotateSpeed: 3
   explodeObject: {fileID: 8344124576167811601, guid: ccc3bc68752484667aa9a1ee24e94f91, type: 3}
+  laserClip: {fileID: 0}

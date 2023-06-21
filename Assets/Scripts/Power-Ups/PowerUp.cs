@@ -10,16 +10,25 @@ public class PowerUp : MonoBehaviour
     [SerializeField]
     private int powerUpId;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    private AudioClip _pClip;
+
+    [SerializeField]
+    private GameObject _audio;
+
+    //private AudioManager aManager;
+    
     void Start()
     {
+        //aManager = GameObject.Find("Audio_Manager").GetComponent<AudioManager>();
 
+       // _audio.AddComponent<DestroyAnything>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         transform.Translate(Vector2.down * _Speed * Time.deltaTime);
 
         if (transform.position.y < -4.7f)
@@ -30,9 +39,16 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //aManager.PlayClip(_pClip);
+
+        //AudioSource.PlayClipAtPoint(_pClip, transform.position);
+
+        Instantiate(_audio, transform.position, Quaternion.identity);
+
+
         if (other.tag == "Player")
         {
-
+            
 
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
@@ -55,9 +71,11 @@ public class PowerUp : MonoBehaviour
                         break;
 
                 }
-
+                
             }
+
         }
         Destroy(this.gameObject);
+        
     }
 }

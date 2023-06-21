@@ -90,10 +90,7 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("AudioSource is not found! Add an audio source component.");
         }
-        else
-        {
-            _audioSource.clip = _laserShot;
-        }
+       
 
 
 
@@ -118,6 +115,8 @@ public class Player : MonoBehaviour
     {
         timePassed = Time.time + fireRate;
 
+        PlaySFXClip(_laserShot);
+        //_audioSource.Play();
 
         if (isTripleShotActive == true)
         {
@@ -128,9 +127,14 @@ public class Player : MonoBehaviour
             Instantiate(missle, transform.position + new Vector3(0, offsetY, 0), Quaternion.identity);
         }
 
-        _audioSource.Play();
+        
 
     }
+    public void PlaySFXClip(AudioClip clip)
+    {
+        _audioSource.PlayOneShot(clip);
+    }    
+  
 
     void CalculateMovement()
     {
